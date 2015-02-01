@@ -4716,13 +4716,13 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     var meta = _meta || _config.meta;
     var url = undefined;
     // TODO change that
-    if (meta.cname === "") {
+    if (meta.cname && meta.cname !== "") {
+      url = "http://" + meta.cname;
+    } else {
       url = "http://" + meta.username + ".github.io";
       if (meta.branch !== "master") {
         url = url + "/" + meta.repositoryName;
       }
-    } else {
-      url = "http://" + meta.cname;
     }
 
     return url;
