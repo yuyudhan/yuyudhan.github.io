@@ -455,7 +455,7 @@ var AsciidocRender = React.createClass({
     this.convertedPost = convertContent(this.props.content || "");
     var htmlContent = this.convertedPost.html;
     var title = this.convertedPost.attributes && this.convertedPost.attributes.map.doctitle;
-    var tags = this.convertedPost.attributes.map["hp-tags"] || "No tag";
+    var tags = this.convertedPost.attributes.map["hp-tags"] || this.props.content && "No tag";
     return React.createElement(
       "div",
       { id: "asciidoc-render", className: "asciidoc-render" },
@@ -5060,7 +5060,6 @@ function _loadActiveTheme(name, meta) {
   var deferred = Q.defer();
   var promises = [];
   var siteUrl = SettingsStore.getSiteUrl(meta);
-  console.log("Site url", siteUrl);
   jquery.get("" + siteUrl + "/themes/" + name + "/theme.json", function (theme) {
     var version = theme.version;
     var files = _.pairs(theme.files);
@@ -5106,7 +5105,7 @@ function _loadActiveTheme(name, meta) {
       (function () {
         var deferredNav = Q.defer();
         promises.push(deferredNav.promise);
-        jquery.get("" + siteUrl + "//hubpress/scripts/helpers/tpl/nav.hbs", function (content) {
+        jquery.get("" + siteUrl + "/hubpress/scripts/helpers/tpl/nav.hbs", function (content) {
           deferredNav.resolve({
             name: "nav",
             path: "partials/nav",
