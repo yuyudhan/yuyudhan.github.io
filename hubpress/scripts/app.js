@@ -5040,6 +5040,7 @@ var _ = require("underscore");
 var Q = require("q");
 var AppActionServerCreators = _interopRequire(require("../actions/AppActionServerCreators"));
 
+var SettingsStore = require("../stores/SettingsStore");
 
 
 
@@ -5055,10 +5056,12 @@ function _getConfig() {
   return deferred.promise;
 }
 
-function _loadActiveTheme(name) {
+function _loadActiveTheme(name, meta) {
   var deferred = Q.defer();
   var promises = [];
-  jquery.get("/themes/" + name + "/theme.json", function (theme) {
+  var siteUrl = SettingsStore.getSiteUrl(meta);
+  console.log("Site url", siteUrl);
+  jquery.get("" + siteUrl + "/themes/" + name + "/theme.json", function (theme) {
     var version = theme.version;
     var files = _.pairs(theme.files);
 
@@ -5072,7 +5075,7 @@ function _loadActiveTheme(name) {
       paginationLoaded = paginationLoaded || file[0] === "pagination";
       navigationLoaded = navigationLoaded || file[0] === "nav";
 
-      jquery.get("/themes/" + name + "/" + file[1], function (content) {
+      jquery.get("" + siteUrl + "/themes/" + name + "/" + file[1], function (content) {
         deferredFile.resolve({
           name: file[0],
           path: file[1],
@@ -5087,7 +5090,7 @@ function _loadActiveTheme(name) {
       (function () {
         var deferredPagination = Q.defer();
         promises.push(deferredPagination.promise);
-        jquery.get("/hubpress/scripts/helpers/tpl/pagination.hbs", function (content) {
+        jquery.get("" + siteUrl + "/hubpress/scripts/helpers/tpl/pagination.hbs", function (content) {
           deferredPagination.resolve({
             name: "pagination",
             path: "partials/pagination",
@@ -5103,7 +5106,7 @@ function _loadActiveTheme(name) {
       (function () {
         var deferredNav = Q.defer();
         promises.push(deferredNav.promise);
-        jquery.get("/hubpress/scripts/helpers/tpl/nav.hbs", function (content) {
+        jquery.get("" + siteUrl + "//hubpress/scripts/helpers/tpl/nav.hbs", function (content) {
           deferredNav.resolve({
             name: "nav",
             path: "partials/nav",
@@ -5136,7 +5139,7 @@ HpWebApiUtils.prototype.getConfig = function () {
 
   _getConfig().then(function (config) {
     _config = config;
-    return _loadActiveTheme(config.theme.name);
+    return _loadActiveTheme(config.theme.name, config.meta);
   }).then(function (themeInfos) {
     var data = {
       config: _config,
@@ -5156,7 +5159,7 @@ HpWebApiUtils.prototype.getConfig = function () {
 module.exports = new HpWebApiUtils();
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/scripts/utils/HpWebApiUtils.js","/app/scripts/utils")
-},{"../actions/AppActionServerCreators":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/actions/AppActionServerCreators.js","_process":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/buffer/index.js","q":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/q/q.js","underscore":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/underscore/underscore.js"}],"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/utils/asciidoctor.js":[function(require,module,exports){
+},{"../actions/AppActionServerCreators":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/actions/AppActionServerCreators.js","../stores/SettingsStore":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/stores/SettingsStore.js","_process":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/buffer/index.js","q":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/q/q.js","underscore":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/underscore/underscore.js"}],"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/utils/asciidoctor.js":[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
 
