@@ -456,6 +456,8 @@ var AsciidocRender = React.createClass({
     var htmlContent = this.convertedPost.html;
     var title = this.convertedPost.attributes && this.convertedPost.attributes.map.doctitle;
     var tags = this.convertedPost.attributes.map["hp-tags"] || this.props.content && "No tag";
+    var tagsComponent = "";
+
     return React.createElement(
       "div",
       { id: "asciidoc-render", className: "asciidoc-render" },
@@ -4728,6 +4730,22 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     return url;
   },
 
+  getHubpressUrl: function (_meta) {
+    var meta = _meta || _config.meta;
+    var url = undefined;
+
+    if (window.location.host === "" + meta.username + ".github.io" || window.location.host === "" + meta.username + ".github.com") {
+      url = "http://" + meta.username + ".github.io";
+      if (meta.branch !== "master") {
+        url = url + "/" + meta.repositoryName;
+      }
+    } else {
+      url = "http://" + meta.cname;
+    }
+
+    return url;
+  },
+
   getThemeUrl: function (name) {
     var url = this.getSiteUrl();
     url += "/themes/" + name;
@@ -5059,8 +5077,8 @@ function _getConfig() {
 function _loadActiveTheme(name, meta) {
   var deferred = Q.defer();
   var promises = [];
-  var siteUrl = SettingsStore.getSiteUrl(meta);
-  jquery.get("" + siteUrl + "/themes/" + name + "/theme.json", function (theme) {
+  var hubpressUrl = SettingsStore.getHubpressUrl(meta);
+  jquery.get("" + hubpressUrl + "/themes/" + name + "/theme.json", function (theme) {
     var version = theme.version;
     var files = _.pairs(theme.files);
 
@@ -5074,7 +5092,7 @@ function _loadActiveTheme(name, meta) {
       paginationLoaded = paginationLoaded || file[0] === "pagination";
       navigationLoaded = navigationLoaded || file[0] === "nav";
 
-      jquery.get("" + siteUrl + "/themes/" + name + "/" + file[1], function (content) {
+      jquery.get("" + hubpressUrl + "/themes/" + name + "/" + file[1], function (content) {
         deferredFile.resolve({
           name: file[0],
           path: file[1],
@@ -5089,7 +5107,7 @@ function _loadActiveTheme(name, meta) {
       (function () {
         var deferredPagination = Q.defer();
         promises.push(deferredPagination.promise);
-        jquery.get("" + siteUrl + "/hubpress/scripts/helpers/tpl/pagination.hbs", function (content) {
+        jquery.get("" + hubpressUrl + "/hubpress/scripts/helpers/tpl/pagination.hbs", function (content) {
           deferredPagination.resolve({
             name: "pagination",
             path: "partials/pagination",
@@ -5105,7 +5123,7 @@ function _loadActiveTheme(name, meta) {
       (function () {
         var deferredNav = Q.defer();
         promises.push(deferredNav.promise);
-        jquery.get("" + siteUrl + "/hubpress/scripts/helpers/tpl/nav.hbs", function (content) {
+        jquery.get("" + hubpressUrl + "/hubpress/scripts/helpers/tpl/nav.hbs", function (content) {
           deferredNav.resolve({
             name: "nav",
             path: "partials/nav",
