@@ -4159,7 +4159,7 @@ var HpWebApiUtils = _interopRequire(require("../utils/HpWebApiUtils"));
 
 function _remoteSave(repository, context, config) {
   var defer = Q.defer();
-  repository.write(context.branch, "admin/config.json", config, "Update configuration file", function (err, sha) {
+  repository.write(context.branch, "hubpress/config.json", config, "Update configuration file", function (err, sha) {
     if (err) {
       defer.reject(err);
     } else {
