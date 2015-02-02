@@ -4225,7 +4225,7 @@ SettingsService.prototype.saveAndPublish = function (settings) {
       message: {
         type: "success",
         title: "Settings save",
-        content: "Your settings have been saved with success."
+        content: "Your settings have been saved with success. Now your posts are going to be regenerated."
       } });
   })["catch"](function (err) {
     console.error("SettingsService - saveAndPublish error", err);
