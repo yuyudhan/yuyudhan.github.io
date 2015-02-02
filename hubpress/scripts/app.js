@@ -5081,7 +5081,7 @@ function _getConfig() {
 function _loadActiveTheme(name, meta) {
   var deferred = Q.defer();
   var promises = [];
-  var hubpressUrl = ""; //SettingsStore.getHubpressUrl(meta);
+  var hubpressUrl = SettingsStore.getHubpressUrl(meta);
   jquery.get("" + hubpressUrl + "/themes/" + name + "/theme.json", function (theme) {
     var version = theme.version;
     var files = _.pairs(theme.files);
