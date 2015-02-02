@@ -458,6 +458,16 @@ var AsciidocRender = React.createClass({
     var tags = this.convertedPost.attributes.map["hp-tags"] || this.props.content && "No tag";
     var tagsComponent = "";
 
+    if (tags) {
+      tagsComponent = React.createElement(
+        "p",
+        null,
+        React.createElement("i", { className: "fa fa-tags" }),
+        " ",
+        tags
+      );
+    }
+
     return React.createElement(
       "div",
       { id: "asciidoc-render", className: "asciidoc-render" },
@@ -466,13 +476,7 @@ var AsciidocRender = React.createClass({
         null,
         title
       ),
-      React.createElement(
-        "p",
-        null,
-        React.createElement("i", { className: "fa fa-tags" }),
-        " ",
-        tags
-      ),
+      tagsComponent,
       React.createElement("div", { ref: "content", dangerouslySetInnerHTML: { __html: htmlContent } })
     );
   }
@@ -5077,7 +5081,7 @@ function _getConfig() {
 function _loadActiveTheme(name, meta) {
   var deferred = Q.defer();
   var promises = [];
-  var hubpressUrl = SettingsStore.getHubpressUrl(meta);
+  var hubpressUrl = ""; //SettingsStore.getHubpressUrl(meta);
   jquery.get("" + hubpressUrl + "/themes/" + name + "/theme.json", function (theme) {
     var version = theme.version;
     var files = _.pairs(theme.files);
