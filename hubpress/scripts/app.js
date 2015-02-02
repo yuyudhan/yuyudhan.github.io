@@ -385,6 +385,10 @@ var HpConstants = _interopRequire(require("../constants/HpConstants"));
 
 var PostsServices = _interopRequire(require("../services/PostsServices.js"));
 
+var ThemeStore = _interopRequire(require("../stores/ThemeStore.js"));
+
+var HpWebApiUtils = _interopRequire(require("../utils/HpWebApiUtils.js"));
+
 var HpDispatcher = require("../dispatchers/HpDispatcher");
 
 var ActionTypes = HpConstants.ActionTypes;
@@ -399,14 +403,24 @@ var SettingsActionGHCreators = {
       message: value.message
     });
 
-    PostsServices.publishPosts();
+    HpWebApiUtils.loadActiveTheme(value.settings.theme.name, value.settings.meta).then(function (themeInfos) {
+      ThemeStore.registerTheme({
+        name: value.settings.theme.name,
+        files: themeInfos.files,
+        version: themeInfos.version
+      });
+
+      PostsServices.publishPosts();
+    })["catch"](function (err) {
+      console.log(err);
+    });
   }
 };
 
 module.exports = SettingsActionGHCreators;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app/scripts/actions/SettingsActionGHCreators.js","/app/scripts/actions")
-},{"../constants/HpConstants":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/constants/HpConstants.js","../dispatchers/HpDispatcher":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/dispatchers/HpDispatcher.js","../services/PostsServices.js":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/services/PostsServices.js","_process":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/components/AsciidocRender.react.js":[function(require,module,exports){
+},{"../constants/HpConstants":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/constants/HpConstants.js","../dispatchers/HpDispatcher":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/dispatchers/HpDispatcher.js","../services/PostsServices.js":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/services/PostsServices.js","../stores/ThemeStore.js":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/stores/ThemeStore.js","../utils/HpWebApiUtils.js":"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/utils/HpWebApiUtils.js","_process":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/process/browser.js","buffer":"/Users/anthonny/00-Development/test-react-hubpress/node_modules/browserify/node_modules/buffer/index.js"}],"/Users/anthonny/00-Development/test-react-hubpress/app/scripts/components/AsciidocRender.react.js":[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
 
@@ -4206,8 +4220,6 @@ SettingsService.prototype.saveAndPublish = function (settings) {
 
     return deferred.promise;
   }).then(function () {
-    return HpWebApiUtils.getConfig();
-  }).then(function () {
     SettingsActionGHCreators.receiveSettings({
       settings: settings,
       message: {
@@ -4886,6 +4898,12 @@ var ThemeStore = (function () {
     this.removeListener(CHANGE_EVENT, callback);
   };
 
+  ThemeStore.prototype.registerTheme = function (theme) {
+    this.setThemeName(theme.name);
+    this.setThemeVersion(theme.version);
+    this.registerFiles(theme.files);
+  };
+
   ThemeStore.prototype.registerFiles = function (themeFiles) {
     var _this = this;
     console.info("ThemeStore - registerFiles");
@@ -5175,6 +5193,10 @@ HpWebApiUtils.prototype.getConfig = function () {
   });
 
   return deferred.promise;
+};
+
+HpWebApiUtils.prototype.loadActiveTheme = function (name, meta) {
+  return _loadActiveTheme(name, meta);
 };
 
 module.exports = new HpWebApiUtils();
