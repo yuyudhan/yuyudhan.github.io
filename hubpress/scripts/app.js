@@ -4700,7 +4700,7 @@ var _loadConfig = function (config) {
   if (_config.meta.cname) {
     urlSite = "http://" + _config.meta.cname;
   } else {
-    urlSite = "http://" + _config.meta.username + "github.io/" + _config.meta.repositoryName;
+    urlSite = "http://" + _config.meta.username + ".github.io/" + _config.meta.repositoryName;
   }
 
   _config.site = assign({}, _config.site, {
