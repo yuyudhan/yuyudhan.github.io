@@ -4746,7 +4746,7 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     return url;
   },
 
-  getHubpressUrl: function(_meta) {
+  getHubpressUrl: function (_meta) {
     var meta = _meta || _config.meta;
     var url = window.location.protocol + "//" + window.location.host;
 
@@ -4754,8 +4754,7 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
       if (meta.branch !== "master") {
         url = url + "/" + meta.repositoryName;
       }
-    }
-    else {
+    } else {
       if (meta.branch !== "master" && (!meta.cname || meta.cname === "")) {
         url = url + "/" + meta.repositoryName;
       }
