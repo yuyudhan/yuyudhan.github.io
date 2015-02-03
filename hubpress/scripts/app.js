@@ -4748,15 +4748,10 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
 
   getHubpressUrl: function (_meta) {
     var meta = _meta || _config.meta;
-    var url = undefined;
+    var url = window.location.protocol + "//" + window.location.host;
 
-    if (window.location.host === "" + meta.username + ".github.io" || window.location.host === "" + meta.username + ".github.com") {
-      url = "http://" + meta.username + ".github.io";
-      if (meta.branch !== "master") {
-        url = url + "/" + meta.repositoryName;
-      }
-    } else {
-      url = "http://" + meta.cname;
+    if (meta.branch !== "master") {
+      url = url + "/" + meta.repositoryName;
     }
 
     return url;
