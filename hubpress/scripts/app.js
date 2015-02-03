@@ -4746,12 +4746,19 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     return url;
   },
 
-  getHubpressUrl: function (_meta) {
+  getHubpressUrl: function(_meta) {
     var meta = _meta || _config.meta;
     var url = window.location.protocol + "//" + window.location.host;
 
-    if ((!meta.cname || meta.cname === "") && meta.branch !== "master") {
-      url = url + "/" + meta.repositoryName;
+    if (window.location.host === "" + meta.username + ".github.io" || window.location.host === "" + meta.username + ".github.com") {
+      if (meta.branch !== "master") {
+        url = url + "/" + meta.repositoryName;
+      }
+    }
+    else {
+      if (meta.branch !== "master") {
+        url = url + "/" + meta.repositoryName;
+      }
     }
 
     return url;
