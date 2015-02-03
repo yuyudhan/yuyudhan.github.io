@@ -4756,7 +4756,7 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
       }
     }
     else {
-      if (meta.branch !== "master") {
+      if (meta.branch !== "master" && (!meta.cname || meta.cname === "")) {
         url = url + "/" + meta.repositoryName;
       }
     }
