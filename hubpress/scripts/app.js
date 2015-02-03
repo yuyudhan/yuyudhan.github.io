@@ -4203,14 +4203,16 @@ SettingsService.prototype.saveAndPublish = function (settings) {
   _remoteSave(repository, context, JSON.stringify(settings)).then(function (commitSha) {
     var deferred = Q.defer();
     var cb = function (err, sha) {
-      if (err) {
+      // not found if we try to delete CNAME that not exist
+      // TODO Compare with the previous settings state
+      if (err !== "not found") {
         deferred.reject(err);
       } else {
         deferred.resolve(sha);
       }
     };
 
-    if (settings.meta.cname === "") {
+    if (!settings.meta.cname || settings.meta.cname === "") {
       console.info("SettingsService - saveAndPublish delete CNAME");
       repository["delete"](settings.meta.branch, "CNAME", cb);
     } else {
