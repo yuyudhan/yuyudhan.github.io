@@ -4212,7 +4212,7 @@ SettingsService.prototype.saveAndPublish = function (settings) {
 
     if (settings.meta.cname === "") {
       console.info("SettingsService - saveAndPublish delete CNAME");
-      repository["delete"](settings.meta.branch, "CNAME", "Remove CNAME", cb);
+      repository["delete"](settings.meta.branch, "CNAME", cb);
     } else {
       console.info("SettingsService - saveAndPublish save CNAME");
       repository.write(settings.meta.branch, "CNAME", settings.meta.cname, "Update CNAME with " + settings.meta.cname, cb);
