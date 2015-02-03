@@ -4750,7 +4750,7 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     var meta = _meta || _config.meta;
     var url = window.location.protocol + "//" + window.location.host;
 
-    if (meta.branch !== "master") {
+    if ((!meta.cname || meta.cname === "") && meta.branch !== "master") {
       url = url + "/" + meta.repositoryName;
     }
 
