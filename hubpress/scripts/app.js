@@ -1408,7 +1408,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "repositoryName" },
                 "Git repository name"
               ),
               React.createElement(
@@ -1422,7 +1422,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "branch" },
                 "Git branch"
               ),
               React.createElement(
@@ -1436,7 +1436,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "cname" },
                 "Git CNAME"
               ),
               React.createElement("input", { type: "text", name: "cname", valueLink: this.linkState("cname"), className: "form-control" }),
@@ -1464,7 +1464,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "title" },
                 "Title"
               ),
               React.createElement("input", { type: "text", name: "title", valueLink: this.linkState("title"), className: "form-control", required: true })
@@ -1474,7 +1474,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "description" },
                 "Description"
               ),
               React.createElement("textarea", { name: "description", cols: "30", rows: "10", valueLink: this.linkState("description"), className: "form-control", required: true })
@@ -1484,7 +1484,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "logo" },
                 "Logo"
               ),
               React.createElement("input", { type: "text", name: "logo", valueLink: this.linkState("logo"), className: "form-control", required: true })
@@ -1494,7 +1494,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "cover" },
                 "Cover image"
               ),
               React.createElement("input", { type: "text", name: "cover", valueLink: this.linkState("cover"), className: "form-control", required: true })
@@ -1504,7 +1504,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "theme" },
                 "Theme"
               ),
               React.createElement("input", { type: "text", name: "theme", valueLink: this.linkState("theme"), className: "form-control", required: true })
@@ -1514,7 +1514,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "postsPerPage" },
                 "Posts per page"
               ),
               React.createElement("input", { type: "text", name: "postsPerPage", valueLink: this.linkState("postsPerPage"), className: "form-control", required: true })
@@ -1524,7 +1524,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "googleAnalytics" },
                 "Google analytics"
               ),
               React.createElement("input", { type: "text", name: "googleAnalytics", valueLink: this.linkState("googleAnalytics"), className: "form-control" })
@@ -1534,7 +1534,7 @@ Settings.prototype.render = function () {
               null,
               React.createElement(
                 "label",
-                { htmlFor: "username" },
+                { htmlFor: "disqus" },
                 "Disqus shortname"
               ),
               React.createElement("input", { type: "text", name: "disqus", valueLink: this.linkState("disqus"), className: "form-control" })
@@ -4205,7 +4205,7 @@ SettingsService.prototype.saveAndPublish = function (settings) {
     var cb = function (err, sha) {
       // not found if we try to delete CNAME that not exist
       // TODO Compare with the previous settings state
-      if (err !== "not found") {
+      if (err && err !== "not found") {
         deferred.reject(err);
       } else {
         deferred.resolve(sha);
