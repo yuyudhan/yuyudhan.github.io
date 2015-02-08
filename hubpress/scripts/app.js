@@ -1324,7 +1324,8 @@ Settings.prototype.getSiteUrl = function () {
   return SettingsStore.getSiteUrl({
     username: this.state.username,
     repositoryName: this.state.repositoryName,
-    cname: this.state.cname
+    cname: this.state.cname,
+    branch: this.state.branch
   });
 };
 
@@ -1826,6 +1827,7 @@ PaginationGenerator.prototype.generate = function (params) {
   var defer = Q.defer();
   var pageCount = 1;
   var siteConfig = SettingsStore.config().site;
+  siteConfig.url = SettingsStore.getSiteUrl();
   var siteRoot = siteConfig.url;
   var pagePath = "index.html";
   var postsPageToGenerate = [];
@@ -4871,9 +4873,12 @@ function dispatcher(payload) {
 }
 
 function getTemplateOptions() {
+  var blog = SettingsStore.config().site;
+  blog.url = SettingsStore.getSiteUrl();
+
   return {
     data: {
-      blog: SettingsStore.config().site
+      blog: blog
     }
   };
 }
