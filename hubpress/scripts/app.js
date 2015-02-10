@@ -634,7 +634,11 @@ Hubpress.prototype.showNotification = function (message) {
   };
   if (message.type === "error") {
     this.refs.toastr.error(message.content, message.title, options);
-  } else {
+  }
+  if (message.type === "warning") {
+    this.refs.toastr.warning(message.content, message.title, options);
+  }
+  if (message.type === "success") {
     this.refs.toastr.success(message.content, message.title, options);
   }
 };
@@ -711,7 +715,7 @@ var Login = React.createClass({
   mixins: [Router.Navigation],
 
   getInitialState: function () {
-    return { email: "", password: "", loading: false };
+    return { email: "", password: "", twoFactorCode: "", twoFactorRequired: false, loading: false };
   },
 
   componentDidMount: function () {
@@ -726,7 +730,7 @@ var Login = React.createClass({
     if (AuthStore.getStatus().loggedIn) {
       this.transitionTo("/posts");
     }
-    this.setState({ loading: false });
+    this.setState({ loading: false, twoFactorRequired: AuthStore.message && AuthStore.message.otp });
   },
 
   _handleChangeEmail: function (event) {
@@ -737,13 +741,18 @@ var Login = React.createClass({
     this.setState({ password: event.target.value });
   },
 
+  _handleChangeTwoFactorCode: function (event) {
+    this.setState({ twoFactorCode: event.target.value });
+  },
+
   _handleSubmit: function (event) {
     event.preventDefault();
 
 
     AuthActionCreators.logIn({
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      twoFactorCode: this.state.twoFactorCode
     });
     this.setState({ loading: true });
   },
@@ -751,8 +760,13 @@ var Login = React.createClass({
   render: function () {
     var errors = "";
     var loginButton = "Log in";
+    var twoFactorInput = "";
     if (this.state.loading) {
       loginButton = React.createElement("i", { className: "fa fa-spinner fa-spin" });
+    }
+
+    if (this.state.twoFactorRequired) {
+      twoFactorInput = React.createElement("input", { ref: "twoFactorCode", type: "text", name: "twoFactorCode", onChange: this._handleChangeTwoFactorCode, placeholder: "Two factor code", title: "Enter your two factor code" });
     }
 
     return React.createElement(
@@ -773,6 +787,7 @@ var Login = React.createClass({
         { onSubmit: this._handleSubmit },
         React.createElement("input", { ref: "email", type: "text", name: "email", onChange: this._handleChangeEmail, placeholder: "Username or Email", title: "Enter your github username or email" }),
         React.createElement("input", { ref: "password", type: "password", name: "password", onChange: this._handleChangePassword, placeholder: "Password", title: "Enter your github password" }),
+        twoFactorInput,
         React.createElement(
           "button",
           { type: "submit", className: "button success" },
@@ -3500,7 +3515,8 @@ AuthServices.prototype.login = function (credentials) {
   var github = Github.renewInstance({
     auth: "basic",
     username: credentials.email,
-    password: credentials.password
+    password: credentials.password,
+    twoFactorCode: credentials.twoFactorCode
   });
 
   var context = Github.getContext();
@@ -3541,14 +3557,30 @@ AuthServices.prototype.login = function (credentials) {
       }
     });
   })["catch"](function (error) {
-    console.error("AuthServices - login error", error);
+    var message = {
+      type: "error",
+      title: "Authentication"
+    };
+    var otpRequired;
+
+    if (error.request) {
+      var otp = error.request.getResponseHeader("X-GitHub-OTP") || "";
+      otpRequired = otp.split(";")[0] === "required";
+    }
+
+    if (otpRequired) {
+      console.log("AuthServices - OTP required : ", otpRequired);
+      message.type = "warning";
+      message.content = "A two-factor authentication code is needed.";
+      message.otp = true;
+    } else {
+      console.error("AuthServices - login error", error);
+      message.content = "An error has occurred, see your console for more informations.";
+    }
+
     // Call action
     AuthActionGHCreators.receiveAuthentication({
-      message: {
-        type: "error",
-        title: "Authentication",
-        content: "An error has occurred, see your console for more informations."
-      }
+      message: message
     });
   });
 };
