@@ -3569,6 +3569,8 @@ AuthServices.prototype.login = function (credentials) {
     }
 
     if (otpRequired) {
+      // for sms with a post on auth
+      _createAuthorization(authorization);
       console.log("AuthServices - OTP required : ", otpRequired);
       message.type = "warning";
       message.content = "A two-factor authentication code is needed.";
