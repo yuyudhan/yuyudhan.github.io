@@ -4775,7 +4775,7 @@ var SettingsStore = assign({}, EventEmitter.prototype, {
     if (meta.cname && meta.cname !== "") {
       url = "http://" + meta.cname;
     } else {
-      url = "http://" + meta.username + ".github.io";
+      url = "https://" + meta.username + ".github.io";
       if (meta.branch !== "master") {
         url = url + "/" + meta.repositoryName;
       }
