@@ -17,8 +17,8 @@ permalink: /about/
             <div class="intro-section mb-12">
                 <h2>Hi, I'm Ankur Pandey! 👋</h2>
                 <p>
-                    Welcome to my corner of the internet! I'm a passionate developer, tech enthusiast, and lifelong learner 
-                    who loves exploring the endless possibilities that technology offers. This blog is where I share my journey, 
+                    Welcome to my corner of the internet! I'm a passionate developer, tech enthusiast, and lifelong learner
+                    who loves exploring the endless possibilities that technology offers. This blog is where I share my journey,
                     insights, and discoveries in the world of software development.
                 </p>
             </div>
@@ -26,13 +26,13 @@ permalink: /about/
             <div class="section mb-12">
                 <h2>My Journey</h2>
                 <p>
-                    My adventure in technology started with curiosity and has evolved into a deep passion for creating 
-                    meaningful solutions through code. I believe in the power of technology to solve real-world problems 
+                    My adventure in technology started with curiosity and has evolved into a deep passion for creating
+                    meaningful solutions through code. I believe in the power of technology to solve real-world problems
                     and make people's lives better.
                 </p>
                 <p>
-                    Throughout my journey, I've had the opportunity to work with various technologies, frameworks, and 
-                    programming languages. Each project has taught me something new and reinforced my belief that 
+                    Throughout my journey, I've had the opportunity to work with various technologies, frameworks, and
+                    programming languages. Each project has taught me something new and reinforced my belief that
                     continuous learning is the key to growth in this field.
                 </p>
             </div>
@@ -40,7 +40,7 @@ permalink: /about/
             <div class="section mb-12">
                 <h2>What I Do</h2>
                 <p>
-                    I enjoy working across the full stack, from designing user interfaces to architecting backend systems. 
+                    I enjoy working across the full stack, from designing user interfaces to architecting backend systems.
                     My interests span across:
                 </p>
                 <ul>
@@ -69,13 +69,13 @@ permalink: /about/
             <div class="section mb-12">
                 <h2>Why I Blog</h2>
                 <p>
-                    I started this blog to document my learning journey and share knowledge with the community. 
-                    I believe that teaching others is one of the best ways to solidify your own understanding, 
+                    I started this blog to document my learning journey and share knowledge with the community.
+                    I believe that teaching others is one of the best ways to solidify your own understanding,
                     and I hope my experiences can help others on their own paths.
                 </p>
                 <p>
-                    Whether you're a beginner just starting out or an experienced developer looking for new perspectives, 
-                    I hope you'll find something valuable here. The tech community has given me so much, and this is 
+                    Whether you're a beginner just starting out or an experienced developer looking for new perspectives,
+                    I hope you'll find something valuable here. The tech community has given me so much, and this is
                     my way of giving back.
                 </p>
             </div>
@@ -83,7 +83,7 @@ permalink: /about/
             <div class="section mb-12">
                 <h2>Let's Connect!</h2>
                 <p>
-                    I'd love to connect with fellow developers, tech enthusiasts, and anyone interested in technology. 
+                    I'd love to connect with fellow developers, tech enthusiasts, and anyone interested in technology.
                     Feel free to reach out if you want to:
                 </p>
                 <ul>
@@ -92,7 +92,7 @@ permalink: /about/
                     <li>Ask questions or seek advice</li>
                     <li>Just say hello!</li>
                 </ul>
-                
+
                 <div class="connect-links" style="display: flex; gap: var(--space-4); justify-content: center; margin-top: var(--space-8); flex-wrap: wrap;">
                     <a href="https://github.com/yuyudhan" target="_blank" rel="noopener" class="btn">
                         <i class="fab fa-github"></i> GitHub
@@ -118,6 +118,7 @@ permalink: /about/
             </div>
         </div>
     </div>
+
 </div>
 
 <style>
@@ -185,9 +186,10 @@ permalink: /about/
         flex-direction: column;
         align-items: center;
     }
-    
+
     .connect-links .btn {
         width: 200px;
     }
 }
 </style>
+

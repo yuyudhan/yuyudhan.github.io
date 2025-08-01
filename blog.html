@@ -14,7 +14,7 @@ permalink: /blog/
     <!-- Search Bar (for future implementation) -->
     <div class="search-container mb-8" style="max-width: 500px; margin: 0 auto;">
         <div style="position: relative;">
-            <input type="text" id="search-input" placeholder="Search posts..." 
+            <input type="text" id="search-input" placeholder="Search posts..."
                    style="width: 100%; padding: 12px 20px; border: 2px solid var(--border-color); border-radius: var(--border-radius); font-size: var(--font-size-base);">
             <i class="fas fa-search" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
         </div>
@@ -63,11 +63,11 @@ permalink: /blog/
         {% if paginator.previous_page %}
         <a href="{{ paginator.previous_page_path | relative_url }}" class="btn btn-outline">Previous</a>
         {% endif %}
-        
+
         <span style="margin: 0 var(--space-4); color: var(--text-light);">
             Page {{ paginator.page }} of {{ paginator.total_pages }}
         </span>
-        
+
         {% if paginator.next_page %}
         <a href="{{ paginator.next_page_path | relative_url }}" class="btn btn-outline">Next</a>
         {% endif %}
@@ -186,9 +186,10 @@ permalink: /blog/
         flex-direction: column;
         gap: var(--space-3);
     }
-    
+
     .search-container {
         margin: 0 var(--space-4) var(--space-8);
     }
 }
 </style>
+
