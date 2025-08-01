@@ -1,0 +1,32 @@
+# .editorconfig
+
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Markdown files
+[*.{md,markdown}]
+trim_trailing_whitespace = false
+
+# Shell scripts
+[*.{sh,bash,zsh}]
+end_of_line = lf
+
+# Windows batch files
+[*.{bat,cmd}]
+end_of_line = crlf
+
+# Make files
+[{Makefile,makefile,*.mk}]
+indent_style = tab
+indent_size = 4

@@ -1,0 +1,154 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <h1 class="fade-in-up">Hi, I'm Ankur Pandey</h1>
+        <p class="fade-in-up">Developer, tech enthusiast, and lifelong learner sharing thoughts and experiences through code and words.</p>
+        <div class="hero-actions fade-in-up">
+            <a href="#recent-posts" class="btn">Read My Blog</a>
+            <a href="/about" class="btn btn-outline">About Me</a>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Posts Section -->
+<section id="recent-posts" class="py-8">
+    <div class="container">
+        <div class="text-center mb-8">
+            <h2>Recent Posts</h2>
+            <p class="text-light">Latest thoughts and experiences from my development journey</p>
+        </div>
+        
+        {% if site.posts.size > 0 %}
+        <div class="posts-grid">
+            {% for post in site.posts limit:6 %}
+            <article class="post-card fade-in-up">
+                <div class="post-meta">
+                    <time datetime="{{ post.date | date_to_xmlschema }}">
+                        {{ post.date | date: "%B %d, %Y" }}
+                    </time>
+                    {% if post.author %}
+                    <span>by {{ post.author }}</span>
+                    {% endif %}
+                </div>
+                <h3 class="post-title">
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </h3>
+                {% if post.excerpt %}
+                <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+                {% endif %}
+                {% if post.tags.size > 0 %}
+                <div class="post-tags">
+                    {% for tag in post.tags limit:3 %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-8">
+            <a href="/blog" class="btn">View All Posts</a>
+        </div>
+        {% else %}
+        <div class="text-center">
+            <p class="text-light">No posts yet. Check back soon for exciting content!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="py-8" style="background: var(--background-light);">
+    <div class="container">
+        <div class="text-center">
+            <h2>About This Blog</h2>
+            <p style="max-width: 600px; margin: 0 auto;">
+                Welcome to my digital space where I share insights, experiences, and learnings from my journey as a developer. 
+                Here you'll find posts about technology, programming, personal projects, and thoughts on the ever-evolving world of software development.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Connect Section -->
+<section class="py-8">
+    <div class="container">
+        <div class="text-center">
+            <h2>Let's Connect</h2>
+            <p class="text-light mb-8">I'd love to hear from you! Connect with me on social media or drop me a message.</p>
+            <div class="social-links" style="justify-content: center; gap: var(--space-6);">
+                {% if site.github_username %}
+                <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener" style="width: 60px; height: 60px; font-size: 24px;">
+                    <i class="fab fa-github"></i>
+                </a>
+                {% endif %}
+                {% if site.twitter_username %}
+                <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener" style="width: 60px; height: 60px; font-size: 24px;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                {% endif %}
+                <a href="/contact" style="width: 60px; height: 60px; font-size: 24px; background: var(--accent-color);">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="{{ '/feed.xml' | relative_url }}" target="_blank" rel="noopener" style="width: 60px; height: 60px; font-size: 24px;">
+                    <i class="fas fa-rss"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Hero section enhancements */
+.hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced social links for connect section */
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.social-links a:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation delays for stagger effect */
+.fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+.fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+.fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+
+@media (max-width: 768px) {
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-actions .btn {
+        width: 200px;
+        text-align: center;
+    }
+}
+</style>

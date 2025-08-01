@@ -1,0 +1,70 @@
+# _config.yml
+
+# Site settings
+title: Ankur Pandey's Blog
+description: Thoughts, ideas, and experiences from a developer's journey
+baseurl: ""
+url: "https://yuyudhan.github.io"
+twitter_username: yuyudhan
+github_username: yuyudhan
+
+# Author information
+author:
+  name: Ankur Pandey
+  email: ankur@example.com
+  bio: Developer, tech enthusiast, and lifelong learner
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Pagination
+paginate: 5
+paginate_path: "/page:num/"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:year/:month/:day/:title/
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: Ankur Pandey
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+# Theme settings
+theme_settings:
+  primary_color: "#2c3e50"
+  accent_color: "#3498db"
+  text_color: "#2c3e50"
+  background_color: "#ffffff"
+  sidebar_color: "#34495e"
+
