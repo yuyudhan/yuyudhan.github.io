@@ -24,13 +24,13 @@ The other half of the itch was privacy. The good transcription services wanted m
 
 ## What it looks like
 
-![Holding fn while saying a short greeting that changes its mind ("the launch is on friday, no wait, thursday"), then the cleaned-up email pasted into Mail]({{ '/assets/img/posts/simple-voice/demo.gif' | relative_url }})
+<video src="{{ '/assets/img/posts/simple-voice/demo.mp4' | relative_url }}" width="1440" height="810" autoplay loop muted playsinline aria-label="Holding fn while saying a short greeting that changes its mind (the launch is on friday, no wait, thursday), then the cleaned-up email pasted into Mail"></video>
 
 That is the whole loop: hold fn, say a sentence that changes its mind halfway, and what lands in Mail is the sentence you meant. If you prefer a toggle, **Control+/** starts and stops a recording. Both shortcuts can be changed.
 
-The feature I did not know I wanted until I had it is editing by voice. Select text in any app, press **Option+/**, say how to change it ("make this more formal", "turn this into bullets", "fix the typos"), and press **Option+/** again. The rewrite replaces the selection, and Cmd+Z undoes it.
+The other half is editing by voice. Select text in any app, press **Option+/**, say how to change it ("make this more formal", "turn this into bullets", "fix the typos"), and press **Option+/** again. The rewrite replaces the selection, and Cmd+Z undoes it.
 
-![Selecting a note, pressing Option+/ and saying "make this more formal", then the note rewritten in place]({{ '/assets/img/posts/simple-voice/edit-by-voice.gif' | relative_url }})
+<video src="{{ '/assets/img/posts/simple-voice/edit-by-voice.mp4' | relative_url }}" width="1440" height="810" autoplay loop muted playsinline preload="metadata" aria-label="Selecting a note, pressing Option+/ and saying make this more formal, then the note rewritten in place"></video>
 
 Around that there is the rest of an app you live with:
 

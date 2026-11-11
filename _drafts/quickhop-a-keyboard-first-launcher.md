@@ -26,7 +26,7 @@ So the requirement was simple to say: the same launcher on both machines, settin
 
 ## What it looks like
 
-![quickhop in a terminal: converting 5 km to miles, finding Lock Screen, a GitHub quicklink, running a script command, listing clipboard history and expanding a snippet]({{ '/assets/img/posts/quickhop/quickhop-cli.gif' | relative_url }})
+<video src="{{ '/assets/img/posts/quickhop/quickhop-cli.mp4' | relative_url }}" width="880" height="423" autoplay loop muted playsinline aria-label="quickhop in a terminal: converting 5 km to miles, finding Lock Screen, a GitHub quicklink, running a script command, listing clipboard history and expanding a snippet"></video>
 
 Everything works from the command line on both systems:
 

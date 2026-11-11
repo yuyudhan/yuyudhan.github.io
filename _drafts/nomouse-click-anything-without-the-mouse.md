@@ -22,7 +22,7 @@ I spend most of the day in a terminal and an editor with vim keys, and the keybo
 
 ## What it looks like
 
-![Continuous mode on macOS Calculator: labels appear on every key; typing four labels presses 7, ×, 6 and =, and the display shows 42]({{ '/assets/img/posts/nomouse/demo-macos.gif' | relative_url }})
+<video src="{{ '/assets/img/posts/nomouse/demo-macos.mp4' | relative_url }}" width="400" height="710" autoplay loop muted playsinline aria-label="Continuous mode on macOS Calculator: labels appear on every key; typing four labels presses 7, ×, 6 and =, and the display shows 42"></video>
 
 That is continuous mode on the macOS Calculator: labels stay up after every click, so four labels type 7 × 6 = and the display shows 42. Here is the whole first use:
 
@@ -41,7 +41,7 @@ There are four modes:
 
 While labels are up, `1` to `4` hold Shift, Ctrl, Alt or Cmd for the click, so `4` and then a link's label opens it in a new tab on macOS. Backspace undoes a letter. If you are coming from Homerow, `hints.keys = "homerow"` gives you its key bindings.
 
-![The same on Linux: GNOME Calculator on X11 with labels on every button, typing labels to compute 7 × 6 = 42]({{ '/assets/img/posts/nomouse/demo-linux.gif' | relative_url }})
+<video src="{{ '/assets/img/posts/nomouse/demo-linux.mp4' | relative_url }}" width="400" height="548" autoplay loop muted playsinline preload="metadata" aria-label="The same on Linux: GNOME Calculator on X11 with labels on every button, typing labels to compute 7 × 6 = 42"></video>
 
 It needs no configuration. When you want some, `nomouse config init` writes `~/.config/nomouse/config.toml` with every default, and a running daemon picks up a saved file within two seconds:
 
@@ -58,7 +58,7 @@ apps = ["com.mitchellh.ghostty", "kitty"]
 
 On macOS it lives in the menu bar, with a settings window that edits that same file and keeps your comments. On Linux there is a tray icon and a GTK settings window. `nomouse doctor` checks the permissions, the accessibility API, input and the config, and prints the fix for anything missing.
 
-![The macOS menu bar menu: nomouse on, Accessibility allowed, Pause, each mode with its hotkey, Settings, Run doctor, Start at login, Check for updates, About, Quit]({{ '/assets/img/posts/nomouse/menu-light.png' | relative_url }})
+![The macOS menu bar menu: nomouse on, Accessibility allowed, Pause, each mode with its hotkey, Settings, Run doctor, Start at login, Check for updates, About, Quit]({{ '/assets/img/posts/nomouse/menu-light.png' | relative_url }}){: width="251" height="366" loading="lazy"}
 
 ## Under the hood
 

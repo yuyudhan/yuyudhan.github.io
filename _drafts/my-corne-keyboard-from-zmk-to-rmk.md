@@ -21,7 +21,7 @@ just flash left       # double-tap reset first, so it mounts as NICENANO
 
 On a 36-key board there is no number row and no arrow cluster. Everything else lives on layers you reach by holding a thumb key, and that turned out to be the point: my fingers barely move. The layout is Miryoku-style, with QWERTY on the base layer and GACS home-row mods, so A, S, D and F are GUI, Alt, Ctrl and Shift when held, mirrored on the right hand.
 
-![The yuyudhan-1 keymap: QWERTY base with home-row mods and the NAV, NUM, MEDIA, SYM, FUN and MOUSE layers]({{ '/assets/img/posts/keyboard/yuyudhan-1_keymap.svg' | relative_url }})
+![The yuyudhan-1 keymap: QWERTY base with home-row mods and the NAV, NUM, MEDIA, SYM, FUN and MOUSE layers]({{ '/assets/img/posts/keyboard/yuyudhan-1_keymap.svg' | relative_url }}){: width="810" height="2296" loading="lazy"}
 
 Each thumb key is a layer when held and a key when tapped:
 
