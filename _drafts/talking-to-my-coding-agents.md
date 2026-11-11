@@ -4,8 +4,7 @@ title: "Talking to my coding agents: speech-to-text plugins for omp and OpenCode
 date: 2026-11-11 10:10:00 +0530
 description: "Two small push-to-talk plugins that record your mic, transcribe it with Whisper, clean the text up with a fast LLM that knows coding words, and drop it into the agent's prompt."
 tags: [speech-to-text, ai-agents, omp, opencode, open-source]
-project: speech-to-text
-repo: https://github.com/yuyudhan/omp-speech-to-text
+project: [omp-speech-to-text, opencode-speech-to-text]
 ---
 
 These are two small plugins that do the same thing in two coding-agent terminals. Press a key, speak your prompt, press it again: the recording is transcribed with Whisper, cleaned up by a fast LLM that fixes punctuation and coding words, and dropped into the prompt. [omp-speech-to-text](https://github.com/yuyudhan/omp-speech-to-text) is for [oh-my-pi (omp)](https://github.com/can1357/oh-my-pi); [opencode-speech-to-text](https://github.com/yuyudhan/opencode-speech-to-text) is for [OpenCode](https://opencode.ai).
@@ -67,7 +66,7 @@ The two plugins differ in their choices:
 - With a cloud provider your audio is uploaded. If that matters, use the OpenCode plugin's `local` provider with whisper.cpp.
 - Cloud APIs reject recordings over 25 MB, so very long monologues fail.
 - On macOS the first recording may be silent until your terminal is allowed to use the microphone.
-- In OpenCode the appended text is correct, but the input box may not grow to show it. That is an [OpenCode issue](https://github.com/sst/opencode/issues/5664), cosmetic only.
+- In OpenCode the appended text is correct, but the input box may not grow to show it. That is an [OpenCode issue](https://github.com/anomalyco/opencode/issues/5664), cosmetic only.
 
 For dictation everywhere, not just in an agent's prompt, there is [Simple Voice](https://github.com/yuyudhan/simple-voice), which runs its models on-device. These plugins are for when you want the text to go straight into the agent's prompt and nowhere else.
 

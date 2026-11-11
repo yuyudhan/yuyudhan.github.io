@@ -4,8 +4,7 @@ title: "The small stuff: Verhoeff checksums in three languages, geometry helpers
 date: 2026-11-11 10:00:00 +0530
 description: "A round-up of the small libraries and side projects on my GitHub: the Verhoeff checksum in JavaScript, Rust and Go, two geometry modules, a typing practice page, a repository analyzer and a Rust learning notebook."
 tags: [libraries, javascript, rust, go, python, open-source]
-project: small-libraries
-repo: https://github.com/yuyudhan
+project: [verhoeff, verhoeff.rs, verhoeff.go, node-coordinate-geometry, geometry, typing-practice, repo_analyzer, learning, yuyudhan-wallpapers]
 ---
 
 Not everything on my GitHub is an app. A lot of it is small: a function I needed twice, a module I wrote to learn something, a page I made for practice. None of these deserves a post of its own, but together they say a fair amount about what I was learning when. Here they are, with what each one does and how to use it.

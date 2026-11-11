@@ -4,11 +4,10 @@ title: "My Corne keyboard, from ZMK to RMK firmware in Rust"
 date: 2026-11-11 10:15:00 +0530
 description: "A wireless Corne split on two nice!nano v2 boards, a Miryoku-style 36-key layout with home-row mods, and why I moved its firmware from ZMK to RMK, with one patch of my own."
 tags: [keyboard, rmk, zmk, rust, embedded, corne]
-project: yuyudhan-rmk-config
-repo: https://github.com/yuyudhan/yuyudhan-rmk-config
+project: [yuyudhan-rmk-config, yuyudhan-zmk-config]
 ---
 
-My keyboard is a Corne: a split board with 42 keys, of which my layout uses 36, on two nice!nano v2 controllers talking over Bluetooth. Its firmware is [RMK](https://github.com/HaoboGu/rmk), written in Rust, and the whole keymap is one TOML file. Before that it ran [ZMK](https://zmk.dev). Both configs are public: [yuyudhan-rmk-config](https://github.com/yuyudhan/yuyudhan-rmk-config) is what runs today, [yuyudhan-zmk-config](https://github.com/yuyudhan/yuyudhan-zmk-config) is where it started.
+My keyboard is a Corne: a split board with 42 keys, of which my layout uses 36, on two nice!nano v2 controllers talking over Bluetooth. Its firmware is [RMK](https://github.com/rmk-rs/rmk), written in Rust, and the whole keymap is one TOML file. Before that it ran [ZMK](https://zmk.dev). Both configs are public: [yuyudhan-rmk-config](https://github.com/yuyudhan/yuyudhan-rmk-config) is what runs today, [yuyudhan-zmk-config](https://github.com/yuyudhan/yuyudhan-zmk-config) is where it started.
 
 There is nothing to install here unless you own the same board. If you do:
 
@@ -60,11 +59,11 @@ The trade-off is real and written down in that comparison: RMK is the youngest a
 
 ## What's next
 
-The fork carries one patch, for an [upstream issue](https://github.com/HaoboGu/rmk/issues/901). Until a change like it lands in RMK itself, the build stays pinned to the fork, by commit, so every machine builds the same firmware.
+The fork carries one patch, for an [upstream issue](https://github.com/rmk-rs/rmk/issues/901). Until a change like it lands in RMK itself, the build stays pinned to the fork, by commit, so every machine builds the same firmware.
 
 ## Links
 
 - RMK config: [github.com/yuyudhan/yuyudhan-rmk-config](https://github.com/yuyudhan/yuyudhan-rmk-config), including [Bluetooth profiles and recovery](https://github.com/yuyudhan/yuyudhan-rmk-config/blob/main/docs/BLUETOOTH.md)
 - ZMK config: [github.com/yuyudhan/yuyudhan-zmk-config](https://github.com/yuyudhan/yuyudhan-zmk-config)
 - My RMK fork: [github.com/yuyudhan/rmk](https://github.com/yuyudhan/rmk/tree/yuyudhan/per-profile-address)
-- RMK itself: [github.com/HaoboGu/rmk](https://github.com/HaoboGu/rmk) and [rmk.rs](https://rmk.rs)
+- RMK itself: [github.com/rmk-rs/rmk](https://github.com/rmk-rs/rmk) and [rmk.rs](https://rmk.rs)
