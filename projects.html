@@ -37,7 +37,7 @@ description: Every public project of Ankur Pandey on GitHub, from keyboard-first
                     {%- endif %}
                     <a href="{{ repo_url }}">Source<span class="visually-hidden"> of {{ project.name }}</span></a>
                     {%- for post in project_posts limit: 3 %}
-                    <a href="{{ post.url | relative_url }}">Post: {{ post.title }}</a>
+                    <a href="{{ post.url | relative_url }}" title="{{ post.title | escape }}">Post<span class="visually-hidden">: {{ post.title }}</span></a>
                     {%- endfor %}
                 </p>
             </li>

@@ -142,14 +142,14 @@ projects:
 
   - name: rumux
     repo: rumux
-    group: other
+    group: tools
     lang: Rust
-    description: No README yet.
+    description: A tmux-like terminal multiplexer in Rust, early days.
 
   - name: opengyan
     repo: opengyan
     group: other
-    description: No README yet.
+    description: An empty repository for now.
 
   - name: homebrew-tap
     repo: homebrew-tap
