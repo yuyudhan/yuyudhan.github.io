@@ -1,9 +1,10 @@
-# Keeps https://yuyudhan.github.io/<app>/install equal to the install.sh of each app's latest
-# GitHub release (nomouse, quickhop), checked against that release's SHA256SUMS
-# (.github/scripts/sync-installers.sh). Runs every 15 minutes, so a new release is live at the
-# short URL within about 15 minutes; run it by hand (`gh workflow run sync-installers.yml -R
-# yuyudhan/yuyudhan.github.io`) right after a release to publish at once. A release whose
-# install.sh fails a check fails this workflow and leaves the previous installer in place.
+# Keeps https://yuyudhan.github.io/<app>/install equal to the install.sh of each project's latest
+# GitHub release: nomouse, quickhop and simple-voice checked against that release's SHA256SUMS,
+# toli against GitHub's blob of install.sh at the release tag (.github/scripts/sync-installers.sh).
+# Runs every 15 minutes, so a new release is live at the short URL within about 15 minutes; run
+# it by hand (`gh workflow run sync-installers.yml -R yuyudhan/yuyudhan.github.io`) right after a
+# release to publish at once. A release whose install.sh fails a check fails this workflow and
+# leaves the previous installer in place.
 name: Sync installers
 
 on:
@@ -27,14 +28,16 @@ jobs:
             - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
             - name: Fetch and verify each latest release's install.sh
               run: .github/scripts/sync-installers.sh
+              env:
+                  GH_TOKEN: ${{ github.token }}
             - name: Commit what changed
               run: |
-                  git add nomouse/install quickhop/install
+                  git add nomouse/install quickhop/install simple-voice/install toli/install
                   if git diff --cached --quiet; then
                       echo "installers already current"
                       exit 0
                   fi
                   git -c user.name="github-actions[bot]" \
                       -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-                      commit -m "🔄 Sync installers from the latest nomouse and quickhop releases"
+                      commit -m "🔄 Sync installers from the latest releases"
                   git push origin HEAD:master

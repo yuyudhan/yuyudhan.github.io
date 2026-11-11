@@ -19,7 +19,8 @@ projects:
     group: tools
     lang: TypeScript
     description: Turns the coding agent you already use into a small team, one lead you talk to and background agents that do the work, with proof before anything is called done.
-    install_url: https://github.com/yuyudhan/toli#quickstart-60-seconds
+    page: /toli/
+    install_url: https://github.com/yuyudhan/toli#toli
 
   - name: nomouse
     repo: nomouse
@@ -42,6 +43,7 @@ projects:
     group: tools
     lang: Rust
     description: Speak anywhere on your Mac and clean, well-formatted text lands in whatever you are typing into.
+    page: /simple-voice/
     install_url: https://github.com/yuyudhan/simple-voice#install
 
   - name: LazyTables

@@ -1,17 +1,21 @@
-<!-- One open-source app's page: page.app (name and URL path), page.tagline, page.summary,
-     page.install_note, page.features (list of {title, text}) and page.links (list of {label, url}).
+<!-- One open-source project's page: page.app (the URL path and repository name), page.heading
+     (the title shown; default page.app), page.tagline, page.summary, page.install_note, page.install_docs
+     (the "other ways to install" link; default the repository's nightly docs/install.md),
+     page.features (list of {title, text}) and page.links (list of {label, url}).
      The install command comes first: it is what the page is for. -->
+{%- assign app_name = page.heading | default: page.app %}
+{%- assign default_docs = "https://github.com/yuyudhan/" | append: page.app | append: "/blob/nightly/docs/install.md" %}
 <article class="wrap page app-page">
     <header class="page-header">
         <p class="eyebrow"><a href="{{ '/projects/' | relative_url }}">Projects</a></p>
-        <h1>{{ page.app }}</h1>
+        <h1>{{ app_name }}</h1>
         <p class="lede">{{ page.tagline }}</p>
     </header>
 
-    <section class="app-install" aria-label="Install {{ page.app }}">
+    <section class="app-install" aria-label="Install {{ app_name }}">
         <pre class="install"><code>curl -fsSL {{ '/' | append: page.app | append: '/install' | absolute_url }} | sh</code></pre>
         <p class="app-install-note">{{ page.install_note }}
-            <a href="https://github.com/yuyudhan/{{ page.app }}/blob/nightly/docs/install.md">Other ways to install</a></p>
+            <a href="{{ page.install_docs | default: default_docs }}">Other ways to install</a></p>
     </section>
 
     <p class="app-summary">{{ page.summary }}</p>
