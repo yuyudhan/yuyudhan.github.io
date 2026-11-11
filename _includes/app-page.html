@@ -1,0 +1,111 @@
+<!-- One open-source app's page: page.app (name and URL path), page.tagline, page.summary,
+     page.install_note, page.features (list of {title, text}) and page.links (list of {label, url}).
+     The install command comes first: it is what the page is for. -->
+<section class="hero app-hero">
+    <div class="container">
+        <h1 class="fade-in-up">{{ page.app }}</h1>
+        <p class="fade-in-up">{{ page.tagline }}</p>
+        <div class="app-install fade-in-up">
+            <pre><code>curl -fsSL {{ '/' | append: page.app | append: '/install' | absolute_url }} | sh</code></pre>
+            <p class="app-install-note">{{ page.install_note }}
+                <a href="https://github.com/yuyudhan/{{ page.app }}/blob/nightly/docs/install.md">Other ways to install</a></p>
+        </div>
+    </div>
+</section>
+
+<section class="py-8">
+    <div class="container">
+        <p class="app-summary">{{ page.summary }}</p>
+        {% if page.features.size > 0 %}
+        <div class="posts-grid">
+            {% for feature in page.features %}
+            <article class="post-card">
+                <h3 class="post-title">{{ feature.title }}</h3>
+                <p class="post-excerpt">{{ feature.text }}</p>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="text-center">
+            {% for link in page.links %}
+            <a href="{{ link.url }}" class="btn{% unless forloop.first %} btn-outline{% endunless %}">{{ link.label }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+.app-hero {
+    margin-bottom: 0;
+}
+
+.app-hero p {
+    color: white;
+}
+
+.app-install {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.app-install pre {
+    text-align: left;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-4) var(--space-12) var(--space-4) var(--space-6);
+    margin: 0 0 var(--space-4);
+    overflow-x: auto;
+}
+
+.app-install code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-lg);
+    color: white;
+    white-space: pre;
+}
+
+.app-install .copy-code-btn {
+    position: absolute;
+    top: 50%;
+    right: var(--space-3);
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+}
+
+.app-install .copy-code-btn:hover,
+.app-install .copy-code-btn.copied {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.hero .app-install-note {
+    font-size: var(--font-size-base);
+    margin-bottom: 0;
+}
+
+.app-install-note a {
+    color: white;
+    text-decoration: underline;
+}
+
+.app-summary {
+    max-width: 760px;
+    margin: 0 auto var(--space-8);
+    text-align: center;
+    font-size: var(--font-size-lg);
+}
+
+.app-hero + .py-8 .btn {
+    margin: 0 var(--space-2) var(--space-2);
+}
+
+@media (max-width: 768px) {
+    .app-install code {
+        font-size: var(--font-size-sm);
+    }
+}
+</style>
