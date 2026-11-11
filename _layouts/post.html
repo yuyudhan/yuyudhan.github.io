@@ -29,16 +29,17 @@ layout: default
 
     <footer class="post-footer">
         {%- if page.project %}
-        {%- assign project = site.data.projects.projects | where: "repo", page.project | first %}
-        {%- assign repo_url = "https://github.com/yuyudhan/" | append: page.project %}
-        {%- if page.repo %}{% assign repo_url = page.repo %}{% endif %}
-        {%- assign project_name = project.name | default: page.project %}
+        {%- comment %} `project` is one repo name or a list of them. {% endcomment %}
+        {%- assign repos = page.project | join: "," | split: "," %}
         <p class="post-project">
-            {%- if project.page %}
-            This post is about <a href="{{ project.page | relative_url }}">{{ project_name }}</a>. The source is <a href="{{ repo_url }}">on GitHub</a>.
-            {%- else %}
-            This post is about <a href="{{ repo_url }}">{{ project_name }}</a>, on GitHub.
-            {%- endif %}
+            {%- if repos.size == 1 %}This post is about{% else %}This post covers{% endif %}
+            {%- for repo in repos %}
+            {%- assign project = site.data.projects.projects | where: "repo", repo | first %}
+            {%- assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: repo %}
+            {%- if repos.size == 1 and page.repo %}{% assign repo_url = page.repo %}{% endif %}
+            {%- if forloop.first %} {% elsif forloop.last %} and {% else %}, {% endif -%}
+            <a href="{{ project.page | default: repo_url | relative_url }}">{{ project.name | default: repo }}</a>
+            {%- endfor %}.
         </p>
         {%- endif %}
 
