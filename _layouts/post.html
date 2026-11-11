@@ -1,238 +1,60 @@
 ---
 layout: default
 ---
+{%- assign words = content | strip_html | number_of_words -%}
+{%- assign minutes = words | divided_by: 220 | at_least: 1 -%}
+<article class="wrap post" itemscope itemtype="https://schema.org/BlogPosting">
+    <header class="post-header">
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%-d %B %Y" }}</time>
+            <span aria-hidden="true">·</span>
+            <span>{{ minutes }} min read</span>
+        </p>
+        <h1 itemprop="headline">{{ page.title }}</h1>
+        {%- if page.description %}
+        <p class="lede" itemprop="description">{{ page.description }}</p>
+        {%- endif %}
+        {%- if page.tags.size > 0 %}
+        <ul class="tags" role="list" aria-label="Tags">
+            {%- for tag in page.tags %}
+            <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a></li>
+            {%- endfor %}
+        </ul>
+        {%- endif %}
+    </header>
 
-<article class="post">
-    <div class="container">
-        <!-- Post Header -->
-        <header class="post-header">
-            <h1 class="post-title">{{ page.title }}</h1>
-            <div class="post-meta">
-                <time datetime="{{ page.date | date_to_xmlschema }}">
-                    {{ page.date | date: "%B %d, %Y" }}
-                </time>
-                {% if page.author %}
-                <span class="post-author">by {{ page.author }}</span>
-                {% endif %}
-                {% if page.categories.size > 0 %}
-                <span class="post-categories">
-                    in {% for category in page.categories %}
-                        <a href="{{ '/categories/' | append: category | relative_url }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
-                    {% endfor %}
-                </span>
-                {% endif %}
-                {% if page.tags.size > 0 %}
-                <div class="post-tags">
-                    {% for tag in page.tags %}
-                    <span class="tag">{{ tag }}</span>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
-        </header>
-
-        <!-- Post Content -->
-        <div class="post-content">
-            {{ content }}
-        </div>
-
-        <!-- Post Navigation -->
-        <nav class="post-navigation">
-            <div class="nav-links">
-                {% if page.previous.url %}
-                <div class="nav-previous">
-                    <span class="nav-subtitle">Previous Post</span>
-                    <a href="{{ page.previous.url | relative_url }}" class="nav-title">
-                        {{ page.previous.title }}
-                    </a>
-                </div>
-                {% endif %}
-
-                {% if page.next.url %}
-                <div class="nav-next">
-                    <span class="nav-subtitle">Next Post</span>
-                    <a href="{{ page.next.url | relative_url }}" class="nav-title">
-                        {{ page.next.title }}
-                    </a>
-                </div>
-                {% endif %}
-            </div>
-        </nav>
-
-        <!-- Related Posts -->
-        {% if site.related_posts.size > 0 %}
-        <section class="related-posts">
-            <h3>Related Posts</h3>
-            <div class="related-posts-grid">
-                {% for post in site.related_posts limit:3 %}
-                <article class="related-post">
-                    <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
-                    <time datetime="{{ post.date | date_to_xmlschema }}">
-                        {{ post.date | date: "%B %d, %Y" }}
-                    </time>
-                    {% if post.excerpt %}
-                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-                    {% endif %}
-                </article>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
-
-        <!-- Back to Blog -->
-        <div class="back-to-blog">
-            <a href="{{ '/blog' | relative_url }}" class="btn btn-outline">← Back to Blog</a>
-        </div>
+    <div class="prose" itemprop="articleBody">
+        {{ content }}
     </div>
+
+    <footer class="post-footer">
+        {%- if page.project %}
+        {%- comment %} `project` is one repo name or a list of them. {% endcomment %}
+        {%- assign repos = page.project | join: "," | split: "," %}
+        <p class="post-project">
+            {%- if repos.size == 1 %}This post is about{% else %}This post covers{% endif %}
+            {%- for repo in repos %}
+            {%- assign project = site.data.projects.projects | where: "repo", repo | first %}
+            {%- assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: repo %}
+            {%- if repos.size == 1 and page.repo %}{% assign repo_url = page.repo %}{% endif %}
+            {%- assign app_page = nil %}
+            {%- if project.page %}{% assign app_page = site.pages | where: "url", project.page | first %}{% endif %}
+            {%- if forloop.first %} {% elsif forloop.last %} and {% else %}, {% endif -%}
+            <a href="{% if app_page %}{{ app_page.url | relative_url }}{% else %}{{ repo_url }}{% endif %}">{{ project.name | default: repo }}</a>
+            {%- endfor %}.
+        </p>
+        {%- endif %}
+
+        {%- if page.previous or page.next %}
+        <nav class="post-nav" aria-label="More posts">
+            {%- if page.previous %}
+            <a class="post-nav-prev" href="{{ page.previous.url | relative_url }}" rel="prev"><span>Older</span>{{ page.previous.title }}</a>
+            {%- endif %}
+            {%- if page.next %}
+            <a class="post-nav-next" href="{{ page.next.url | relative_url }}" rel="next"><span>Newer</span>{{ page.next.title }}</a>
+            {%- endif %}
+        </nav>
+        {%- endif %}
+        <p><a href="{{ '/blog/' | relative_url }}">← All writing</a></p>
+    </footer>
 </article>
-
-<style>
-/* Post-specific styles */
-.post-meta {
-    text-align: center;
-    color: var(--text-light);
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--space-6);
-}
-
-.post-meta time {
-    font-weight: 500;
-}
-
-.post-author::before {
-    content: " • ";
-    margin: 0 var(--space-2);
-}
-
-.post-categories::before {
-    content: " • ";
-    margin: 0 var(--space-2);
-}
-
-.post-tags {
-    margin-top: var(--space-4);
-    display: flex;
-    gap: var(--space-2);
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.post-navigation {
-    margin: var(--space-16) 0;
-    padding: var(--space-8) 0;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.nav-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-}
-
-.nav-previous,
-.nav-next {
-    display: flex;
-    flex-direction: column;
-}
-
-.nav-next {
-    text-align: right;
-}
-
-.nav-subtitle {
-    font-size: var(--font-size-sm);
-    color: var(--text-light);
-    margin-bottom: var(--space-2);
-    text-transform: uppercase;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-.nav-title {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.nav-title:hover {
-    color: var(--accent-color);
-}
-
-.related-posts {
-    margin: var(--space-16) 0;
-}
-
-.related-posts h3 {
-    text-align: center;
-    margin-bottom: var(--space-8);
-    color: var(--primary-color);
-}
-
-.related-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-6);
-}
-
-.related-post {
-    background: var(--background-light);
-    padding: var(--space-4);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-}
-
-.related-post h4 {
-    margin-bottom: var(--space-2);
-    font-size: var(--font-size-base);
-}
-
-.related-post h4 a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.related-post h4 a:hover {
-    color: var(--accent-color);
-}
-
-.related-post time {
-    font-size: var(--font-size-sm);
-    color: var(--text-light);
-    display: block;
-    margin-bottom: var(--space-2);
-}
-
-.related-post .post-excerpt {
-    font-size: var(--font-size-sm);
-    color: var(--text-light);
-    margin-bottom: 0;
-}
-
-.back-to-blog {
-    text-align: center;
-    margin-top: var(--space-12);
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        grid-template-columns: 1fr;
-        gap: var(--space-6);
-    }
-
-    .nav-next {
-        text-align: left;
-    }
-
-    .related-posts-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .post-tags {
-        justify-content: center;
-    }
-}
-</style>
-

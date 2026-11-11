@@ -1,0 +1,37 @@
+<!-- One open-source app's page: page.app (name and URL path), page.tagline, page.summary,
+     page.install_note, page.features (list of {title, text}) and page.links (list of {label, url}).
+     The install command comes first: it is what the page is for. -->
+<article class="wrap page app-page">
+    <header class="page-header">
+        <p class="eyebrow"><a href="{{ '/projects/' | relative_url }}">Projects</a></p>
+        <h1>{{ page.app }}</h1>
+        <p class="lede">{{ page.tagline }}</p>
+    </header>
+
+    <section class="app-install" aria-label="Install {{ page.app }}">
+        <pre class="install"><code>curl -fsSL {{ '/' | append: page.app | append: '/install' | absolute_url }} | sh</code></pre>
+        <p class="app-install-note">{{ page.install_note }}
+            <a href="https://github.com/yuyudhan/{{ page.app }}/blob/nightly/docs/install.md">Other ways to install</a></p>
+    </section>
+
+    <p class="app-summary">{{ page.summary }}</p>
+
+    {%- if page.features.size > 0 %}
+    <ul class="features" role="list">
+        {%- for feature in page.features %}
+        <li class="card">
+            <h2 class="card-title">{{ feature.title }}</h2>
+            <p class="card-text">{{ feature.text }}</p>
+        </li>
+        {%- endfor %}
+    </ul>
+    {%- endif %}
+
+    {%- if page.links.size > 0 %}
+    <p class="app-links">
+        {%- for link in page.links %}
+        <a href="{{ link.url }}" class="button{% unless forloop.first %} button-quiet{% endunless %}">{{ link.label }}</a>
+        {%- endfor %}
+    </p>
+    {%- endif %}
+</article>

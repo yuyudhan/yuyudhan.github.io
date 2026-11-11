@@ -1,0 +1,166 @@
+# Public repositories on github.com/yuyudhan, from `gh repo list yuyudhan --visibility public`.
+# Descriptions come from each repository's description or README; repos without either say so.
+# `page` is the project's page on this site (linked once it exists in the build);
+# otherwise "Install" points at `install_url`.
+
+groups:
+  - id: tools
+    title: Developer tools
+  - id: keyboards
+    title: Keyboards and firmware
+  - id: libraries
+    title: Libraries
+  - id: other
+    title: Everything else
+
+projects:
+  - name: toli
+    repo: toli
+    group: tools
+    lang: TypeScript
+    description: Turns the coding agent you already use into a small team, one lead you talk to and background agents that do the work, with proof before anything is called done.
+    install_url: https://github.com/yuyudhan/toli#quickstart-60-seconds
+
+  - name: nomouse
+    repo: nomouse
+    group: tools
+    lang: Rust
+    page: /nomouse/
+    description: Click anything on screen without the mouse. A free, open-source Homerow alternative for macOS and Linux.
+    install_url: https://github.com/yuyudhan/nomouse#install
+
+  - name: quickhop
+    repo: quickhop
+    group: tools
+    lang: Rust
+    page: /quickhop/
+    description: A fast, keyboard-first launcher for macOS and Linux. A free, open-source Raycast alternative that runs Raycast script commands unchanged.
+    install_url: https://github.com/yuyudhan/quickhop#install
+
+  - name: Simple Voice
+    repo: simple-voice
+    group: tools
+    lang: Rust
+    description: Speak anywhere on your Mac and clean, well-formatted text lands in whatever you are typing into.
+    install_url: https://github.com/yuyudhan/simple-voice#install
+
+  - name: LazyTables
+    repo: LazyTables
+    group: tools
+    lang: Rust
+    description: A terminal SQL database viewer and editor with vim-style navigation.
+
+  - name: opencode-speech-to-text
+    repo: opencode-speech-to-text
+    group: tools
+    lang: JavaScript
+    description: Push-to-talk dictation for the OpenCode prompt, through Groq, OpenAI or offline whisper.cpp, with optional LLM clean-up.
+
+  - name: omp-speech-to-text
+    repo: omp-speech-to-text
+    group: tools
+    lang: TypeScript
+    description: A speech-to-text extension for oh-my-pi (omp), push-to-talk dictation with sox and Whisper.
+
+  - name: repo_analyzer
+    repo: repo_analyzer
+    group: tools
+    lang: Python
+    description: Codebase analysis with large language models, for a local path or a remote repository.
+
+  - name: yuyudhan-rmk-config
+    repo: yuyudhan-rmk-config
+    group: keyboards
+    lang: TOML
+    description: RMK (Rust) firmware for a wireless Corne split keyboard on two nice!nano v2 controllers, the whole keymap in one keyboard.toml.
+
+  - name: yuyudhan-zmk-config
+    repo: yuyudhan-zmk-config
+    group: keyboards
+    lang: Devicetree
+    description: A Miryoku-style ZMK keymap for a Corne split keyboard on nice!nano v2.
+
+  - name: zmk-yuyudhan
+    repo: zmk-yuyudhan
+    group: keyboards
+    lang: Makefile
+    description: ZMK keyboard work. No README yet.
+
+  - name: rmk
+    repo: rmk
+    group: keyboards
+    lang: Rust
+    fork: true
+    description: A fork of RMK, keyboard firmware written in Rust.
+
+  - name: verhoeff.rs
+    repo: verhoeff.rs
+    group: libraries
+    lang: Rust
+    description: The Verhoeff checksum in Rust; catches every single-digit and adjacent-transposition error, with Aadhaar validation.
+
+  - name: verhoeff.go
+    repo: verhoeff.go
+    group: libraries
+    lang: Go
+    description: The Verhoeff checksum in Go, type-safe and dependency-free.
+
+  - name: verhoeff
+    repo: verhoeff
+    group: libraries
+    lang: JavaScript
+    description: The Verhoeff checksum for Node.js, on npm as node-verhoeff.
+
+  - name: node-coordinate-geometry
+    repo: node-coordinate-geometry
+    group: libraries
+    lang: JavaScript
+    description: 2D coordinate geometry functions for Node.js and front-end JavaScript.
+
+  - name: geometry
+    repo: geometry
+    group: libraries
+    lang: JavaScript
+    description: Line and point geometry helpers for Node.js.
+
+  - name: typing-practice
+    repo: typing-practice
+    group: other
+    lang: JavaScript
+    homepage: /typing-practice/
+    description: A small web app for practising touch typing, one character at a time with the finger to use.
+
+  - name: learning
+    repo: learning
+    group: other
+    lang: Rust
+    description: Coding experiments from learning new languages and tools.
+
+  - name: rumux
+    repo: rumux
+    group: tools
+    lang: Rust
+    description: A tmux-like terminal multiplexer in Rust, early days.
+
+  - name: opengyan
+    repo: opengyan
+    group: other
+    description: An empty repository for now.
+
+  - name: homebrew-tap
+    repo: homebrew-tap
+    group: other
+    lang: Ruby
+    description: The Homebrew tap for Simple Voice.
+
+  - name: yuyudhan-wallpapers
+    repo: yuyudhan-wallpapers
+    group: other
+    description: Wallpapers.
+
+  - name: yuyudhan.github.io
+    repo: yuyudhan.github.io
+    group: other
+    lang: HTML
+    homepage: /
+    description: This site, built with Jekyll on GitHub Pages.
