@@ -348,7 +348,6 @@ p {
     color: var(--muted);
 }
 
-.featured,
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
@@ -390,7 +389,6 @@ p {
     color: var(--muted);
 }
 
-.card-links,
 .project-links {
     display: flex;
     flex-wrap: wrap;
@@ -399,12 +397,6 @@ p {
     margin: 0;
     font-family: var(--font-sans);
     font-size: 0.9rem;
-}
-
-.card-lang {
-    margin-left: auto;
-    color: var(--muted);
-    font-size: 0.8rem;
 }
 
 /* ---------- Post lists ---------- */
@@ -804,17 +796,9 @@ pre.install {
     border-color: var(--muted);
 }
 
-.card .code-block pre.install {
-    margin-bottom: 0.9rem;
-}
-
 .code-block > pre.install + .copy-button {
     top: 50%;
     transform: translateY(-50%);
-}
-
-.card .code-block > pre.install + .copy-button {
-    top: calc(50% - 0.45rem);
 }
 
 /* Rouge, kept deliberately quiet: one accent for keywords, muted comments. */

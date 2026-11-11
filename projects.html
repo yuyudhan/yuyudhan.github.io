@@ -20,15 +20,18 @@ description: Every public project of Ankur Pandey on GitHub, from keyboard-first
             {%- for project in items %}
             {%- assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: project.repo %}
             {%- assign project_posts = all_posts | where: "project", project.repo %}
+            {%- comment %} A project's page on this site is linked only once that page exists in the build. {% endcomment %}
+            {%- assign app_page = nil %}
+            {%- if project.page %}{% assign app_page = site.pages | where: "url", project.page | first %}{% endif %}
             <li class="project" id="{{ project.repo | slugify }}">
                 <div class="project-head">
-                    <h3 class="project-name"><a href="{{ project.page | default: repo_url | relative_url }}">{{ project.name }}</a></h3>
+                    <h3 class="project-name"><a href="{% if app_page %}{{ app_page.url | relative_url }}{% else %}{{ repo_url }}{% endif %}">{{ project.name }}</a></h3>
                     <span class="project-meta">{{ project.lang }}{% if project.fork %}{% if project.lang %} · {% endif %}fork{% endif %}</span>
                 </div>
                 <p class="project-text">{{ project.description }}</p>
                 <p class="project-links">
-                    {%- if project.page %}
-                    <a href="{{ project.page | relative_url }}">Install<span class="visually-hidden"> {{ project.name }}</span></a>
+                    {%- if app_page %}
+                    <a href="{{ app_page.url | relative_url }}">Install<span class="visually-hidden"> {{ project.name }}</span></a>
                     {%- elsif project.install_url %}
                     <a href="{{ project.install_url }}">Install<span class="visually-hidden"> {{ project.name }}</span></a>
                     {%- endif %}

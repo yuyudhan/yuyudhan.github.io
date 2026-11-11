@@ -37,8 +37,10 @@ layout: default
             {%- assign project = site.data.projects.projects | where: "repo", repo | first %}
             {%- assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: repo %}
             {%- if repos.size == 1 and page.repo %}{% assign repo_url = page.repo %}{% endif %}
+            {%- assign app_page = nil %}
+            {%- if project.page %}{% assign app_page = site.pages | where: "url", project.page | first %}{% endif %}
             {%- if forloop.first %} {% elsif forloop.last %} and {% else %}, {% endif -%}
-            <a href="{{ project.page | default: repo_url | relative_url }}">{{ project.name | default: repo }}</a>
+            <a href="{% if app_page %}{{ app_page.url | relative_url }}{% else %}{{ repo_url }}{% endif %}">{{ project.name | default: repo }}</a>
             {%- endfor %}.
         </p>
         {%- endif %}

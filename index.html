@@ -6,36 +6,7 @@ description: Ankur Pandey builds developer tools, keyboard-first apps, agent too
     <section class="intro" aria-labelledby="intro-title">
         <h1 id="intro-title">Ankur Pandey</h1>
         <p class="lede">I build developer tools, mostly in Rust and TypeScript: keyboard-first apps for macOS and Linux, tooling for coding agents, and firmware for split keyboards.</p>
-        <p class="intro-links"><a href="{{ '/about/' | relative_url }}">About me</a> <span aria-hidden="true">·</span> <a href="https://github.com/{{ site.github_username }}">GitHub</a></p>
-    </section>
-
-    <section class="section" aria-labelledby="featured-title">
-        <div class="section-head">
-            <h2 id="featured-title">Featured projects</h2>
-            <a class="section-more" href="{{ '/projects/' | relative_url }}">All projects →</a>
-        </div>
-        <ul class="featured" role="list">
-            {%- assign featured = site.data.projects.projects | where: "featured", true %}
-            {%- for project in featured %}
-            <li class="card">
-                <h3 class="card-title">
-                    {%- if project.page %}
-                    <a href="{{ project.page | relative_url }}">{{ project.name }}</a>
-                    {%- else %}
-                    <a href="https://github.com/{{ site.github_username }}/{{ project.repo }}">{{ project.name }}</a>
-                    {%- endif %}
-                </h3>
-                <p class="card-text">{{ project.description }}</p>
-                <p class="card-links">
-                    {%- if project.install_url %}
-                    <a href="{{ project.install_url | relative_url }}">Install<span class="visually-hidden"> {{ project.name }}</span></a>
-                    {%- endif %}
-                    <a href="https://github.com/{{ site.github_username }}/{{ project.repo }}">Source<span class="visually-hidden"> of {{ project.name }}</span></a>
-                    <span class="card-lang">{{ project.lang }}</span>
-                </p>
-            </li>
-            {%- endfor %}
-        </ul>
+        <p class="intro-links"><a href="{{ '/projects/' | relative_url }}">Projects</a> <span aria-hidden="true">·</span> <a href="{{ '/about/' | relative_url }}">About me</a></p>
     </section>
 
     <section class="section" aria-labelledby="latest-title">

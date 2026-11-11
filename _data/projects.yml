@@ -1,7 +1,7 @@
 # Public repositories on github.com/yuyudhan, from `gh repo list yuyudhan --visibility public`.
 # Descriptions come from each repository's description or README; repos without either say so.
-# `featured` projects appear on the home page; `page` (a page on this site) or `install_url`
-# is where their "Install" link points.
+# `page` is the project's page on this site (linked once it exists in the build);
+# otherwise "Install" points at `install_url`.
 
 groups:
   - id: tools
@@ -18,7 +18,6 @@ projects:
     repo: toli
     group: tools
     lang: TypeScript
-    featured: true
     description: Turns the coding agent you already use into a small team, one lead you talk to and background agents that do the work, with proof before anything is called done.
     install_url: https://github.com/yuyudhan/toli#quickstart-60-seconds
 
@@ -26,25 +25,22 @@ projects:
     repo: nomouse
     group: tools
     lang: Rust
-    featured: true
     page: /nomouse/
     description: Click anything on screen without the mouse. A free, open-source Homerow alternative for macOS and Linux.
-    install_url: /nomouse/
+    install_url: https://github.com/yuyudhan/nomouse#install
 
   - name: quickhop
     repo: quickhop
     group: tools
     lang: Rust
-    featured: true
     page: /quickhop/
     description: A fast, keyboard-first launcher for macOS and Linux. A free, open-source Raycast alternative that runs Raycast script commands unchanged.
-    install_url: /quickhop/
+    install_url: https://github.com/yuyudhan/quickhop#install
 
   - name: Simple Voice
     repo: simple-voice
     group: tools
     lang: Rust
-    featured: true
     description: Speak anywhere on your Mac and clean, well-formatted text lands in whatever you are typing into.
     install_url: https://github.com/yuyudhan/simple-voice#install
 
