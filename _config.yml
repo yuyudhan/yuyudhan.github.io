@@ -1,31 +1,47 @@
 # _config.yml
 
-# Site settings
-title: Ankur Pandey's Blog
-description: Thoughts, ideas, and experiences from a developer's journey
+# Site identity: used by the head metadata, the feed and the footer.
+title: Ankur Pandey
+tagline: I build developer tools
+description: >-
+  Ankur Pandey builds developer tools: keyboard-first apps, agent tooling and
+  keyboard firmware, mostly in Rust and TypeScript.
+lang: en
 baseurl: ""
 url: "https://yuyudhan.github.io"
-twitter_username: yuyudhan
 github_username: yuyudhan
+og_image: /assets/img/og-default.png
 
-# Author information
 author:
   name: Ankur Pandey
-  email: ankur@example.com
-  bio: Developer, tech enthusiast, and lifelong learner
+  url: https://github.com/yuyudhan
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
-permalink: /:categories/:year/:month/:day/:title/
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    css_class: highlight
+# Category is deliberately NOT in the permalink: recategorising a post would
+# otherwise change its URL. Old category-prefixed URLs redirect (see blog.html).
+permalink: /:year/:month/:day/:title/
 
-# Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-seo-tag
+  - jekyll-redirect-from
 
-# Exclude from processing
+feed:
+  path: feed.xml
+
+# No theme: the layouts and the stylesheet in this repo are the whole design.
+# (Without this, github-pages injects jekyll-theme-primer's assets/css/style.css.)
+theme: null
+
+redirect_from:
+  json: false
+
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -34,19 +50,14 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - AGENTS.md
+  - openspec/
+  - .pi/
   - README.md
 
-# Pagination
-paginate: 5
-paginate_path: "/page:num/"
+# `collections.posts` is intentionally absent: posts already default to
+# `output: true`, and a `permalink` here would silently shadow the top-level one.
 
-# Collections
-collections:
-  posts:
-    output: true
-    permalink: /:categories/:year/:month/:day/:title/
-
-# Default values
 defaults:
   - scope:
       path: ""
@@ -56,15 +67,12 @@ defaults:
       author: Ankur Pandey
   - scope:
       path: ""
+      type: drafts
+    values:
+      layout: post
+      author: Ankur Pandey
+  - scope:
+      path: ""
       type: pages
     values:
-      layout: default
-
-# Theme settings
-theme_settings:
-  primary_color: "#2c3e50"
-  accent_color: "#3498db"
-  text_color: "#2c3e50"
-  background_color: "#ffffff"
-  sidebar_color: "#34495e"
-
+      layout: page

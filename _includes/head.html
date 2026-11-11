@@ -1,0 +1,56 @@
+{%- assign page_description = page.description | default: page.tagline | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 200 -%}
+{%- if page.title and page.url != "/" -%}
+{%- assign page_title = page.title | append: " · " | append: site.title -%}
+{%- else -%}
+{%- assign page_title = site.title | append: " · " | append: site.tagline -%}
+{%- endif -%}
+{%- assign page_image = page.image | default: site.og_image | absolute_url -%}
+{%- assign canonical = page.url | replace: "index.html", "" | absolute_url -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title | escape }}</title>
+<meta name="description" content="{{ page_description | escape }}">
+<meta name="author" content="{{ site.author.name | escape }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)">
+
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+<meta property="og:description" content="{{ page_description | escape }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ page_image }}">
+<meta property="og:image:alt" content="{{ page.image_alt | default: 'Ankur Pandey: I build developer tools' | escape }}">
+<meta property="og:locale" content="en">
+{%- if page.layout == "post" %}
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{%- if page.last_modified_at %}
+<meta property="article:modified_time" content="{{ page.last_modified_at | date_to_xmlschema }}">
+{%- endif %}
+{%- for tag in page.tags %}
+<meta property="article:tag" content="{{ tag | escape }}">
+{%- endfor %}
+{%- else %}
+<meta property="og:type" content="website">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
+<meta name="twitter:description" content="{{ page_description | escape }}">
+<meta name="twitter:image" content="{{ page_image }}">
+
+<link rel="preload" href="{{ '/assets/fonts/source-serif-4-roman.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+<link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | absolute_url }}">
+<link rel="me" href="https://github.com/{{ site.github_username }}">
+
+<script type="application/ld+json">
+{%- if page.layout == "post" %}
+{"@context":"https://schema.org","@type":"BlogPosting","headline":{{ page.title | jsonify }},"description":{{ page_description | jsonify }},"datePublished":{{ page.date | date_to_xmlschema | jsonify }},"url":{{ canonical | jsonify }},"image":{{ page_image | jsonify }},"author":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ site.author.url | jsonify }}}}
+{%- else %}
+{"@context":"https://schema.org","@type":"WebSite","name":{{ site.title | jsonify }},"url":{{ site.url | append: site.baseurl | append: "/" | jsonify }},"description":{{ site.description | jsonify }},"author":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ site.author.url | jsonify }},"sameAs":["https://github.com/{{ site.github_username }}"]}}
+{%- endif %}
+</script>

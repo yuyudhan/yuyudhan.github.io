@@ -1,0 +1,49 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+description: Every public project of Ankur Pandey on GitHub, from keyboard-first macOS and Linux apps to agent tooling, keyboard firmware and small libraries.
+---
+<div class="wrap page wide">
+    <header class="page-header">
+        <h1>Projects</h1>
+        <p class="lede">Everything I have made public on <a href="https://github.com/{{ site.github_username }}">GitHub</a>, grouped by what it is for.</p>
+    </header>
+
+    {%- assign all_posts = site.posts %}
+    {%- for group in site.data.projects.groups %}
+    {%- assign items = site.data.projects.projects | where: "group", group.id %}
+    {%- if items.size > 0 %}
+    <section class="section" aria-labelledby="group-{{ group.id }}">
+        <h2 id="group-{{ group.id }}">{{ group.title }}</h2>
+        <ul class="project-list" role="list">
+            {%- for project in items %}
+            {%- assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: project.repo %}
+            {%- assign project_posts = all_posts | where: "project", project.repo %}
+            <li class="project" id="{{ project.repo | slugify }}">
+                <div class="project-head">
+                    <h3 class="project-name"><a href="{{ project.page | default: repo_url | relative_url }}">{{ project.name }}</a></h3>
+                    <span class="project-meta">{{ project.lang }}{% if project.fork %}{% if project.lang %} · {% endif %}fork{% endif %}</span>
+                </div>
+                <p class="project-text">{{ project.description }}</p>
+                <p class="project-links">
+                    {%- if project.page %}
+                    <a href="{{ project.page | relative_url }}">Install<span class="visually-hidden"> {{ project.name }}</span></a>
+                    {%- elsif project.install_url %}
+                    <a href="{{ project.install_url }}">Install<span class="visually-hidden"> {{ project.name }}</span></a>
+                    {%- endif %}
+                    {%- if project.homepage and project.homepage != "/" %}
+                    <a href="{{ project.homepage | relative_url }}">Try it<span class="visually-hidden">: {{ project.name }}</span></a>
+                    {%- endif %}
+                    <a href="{{ repo_url }}">Source<span class="visually-hidden"> of {{ project.name }}</span></a>
+                    {%- for post in project_posts limit: 3 %}
+                    <a href="{{ post.url | relative_url }}">Post: {{ post.title }}</a>
+                    {%- endfor %}
+                </p>
+            </li>
+            {%- endfor %}
+        </ul>
+    </section>
+    {%- endif %}
+    {%- endfor %}
+</div>

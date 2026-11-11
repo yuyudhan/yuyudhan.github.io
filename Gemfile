@@ -1,25 +1,11 @@
 # Gemfile
 
 source "https://rubygems.org"
-
-# Jekyll and plugins
-gem "jekyll", "~> 4.3"
-gem "jekyll-feed", "~> 0.12"
-gem "jekyll-sitemap"
-gem "jekyll-seo-tag"
-
-# GitHub Pages compatibility
 gem "github-pages", group: :jekyll_plugins
 
-# Performance and optimization
-gem "jekyll-minifier"
+# Ruby 3 no longer bundles WEBrick; Jekyll 3 uses it for `jekyll serve`.
+gem "webrick", group: :jekyll_plugins
 
-# Development
-group :jekyll_plugins do
-  gem "jekyll-feed"
-  gem "jekyll-sitemap"
-  gem "jekyll-seo-tag"
-end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
