@@ -1,0 +1,24 @@
+---
+layout: default
+title: nomouse
+permalink: /nomouse/
+app: nomouse
+tagline: Click anything on screen without touching the mouse. A free, open-source Homerow alternative for macOS and Linux.
+install_note: Installs nomouse.app on macOS 11+ (Apple silicon and Intel), or the nomouse binary on Linux (x86_64 and aarch64, X11 and Wayland), for your user, after checking its SHA-256. No sudo.
+summary: Press a hotkey, and every button, link, tab and field gets a short label. Type the label and nomouse clicks it.
+features:
+  - title: Hints
+    text: "ctrl+space labels everything clickable in the focused window; type a label to click it, Escape to cancel."
+  - title: Continuous mode
+    text: "ctrl+shift+space keeps labelling after every click, so you can work through a whole form or calculator."
+  - title: Scroll and search
+    text: "ctrl+alt+space picks a scrollable area for h j k l, gg and G; ctrl+alt+/ finds an element by its text."
+  - title: Open source
+    text: "Written in Rust, MIT or Apache-2.0, no telemetry. It reads the accessibility tree, so it works across apps."
+links:
+  - label: nomouse on GitHub
+    url: https://github.com/yuyudhan/nomouse
+  - label: Releases
+    url: https://github.com/yuyudhan/nomouse/releases
+---
+{% include app-page.html %}
